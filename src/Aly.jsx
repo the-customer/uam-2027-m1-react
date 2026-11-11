@@ -1,4 +1,4 @@
-import './Aly.css'
+// import './Aly.css'
 export default function Aly(){
     return <div>
         <h1>Balise Aly</h1>

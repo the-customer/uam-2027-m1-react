@@ -1,17 +1,22 @@
 import { labs } from "../labs/catalogue";
+import Header from "./Header";
 
-export default function Catalog() {
-    console.log(labs)
+const sessions = [
+  ["Démarrer avec React", 0, 4],
+  ["Transmettre des données et réagir aux événements", 4, 7],
+  ["Afficher et mettre à jour une interface", 7, 10],
+  ["Construire un formulaire", 10, 11],
+  ["Partager l’état et utiliser les effets", 11, 14],
+  ["Mémoriser et accéder au DOM", 14, 17],
+  ["Réutiliser et organiser l’état", 17, 20],
+  ["Observer les rendus et charger des données", 20, 22],
+  ["Composer les pages et organiser la navigation", 22, 25],
+  ["Assembler une mini-caisse", 25, 26],
+];
+export default function Catalog({ staticPreview = false }) {
   return (
     <>
-      <header className="border-b border-stone-300 print:hidden bg-slate-400">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-baseline justify-between gap-x-5 gap-y-1 px-5 py-4">
-          <a className="font-semibold hover:underline" href="./index.html">
-            React Concept Lab
-          </a>
-          <span className="muted">Cours React · M1</span>
-        </div>
-      </header>
+      <Header home={staticPreview ? "/" : "#/"} />
       <main className="mx-auto max-w-4xl px-5 pb-16 pt-9 sm:pt-14">
         <div className="max-w-2xl border-b border-stone-300 pb-6">
           <h1 className="page-title">React Concept Lab</h1>
@@ -21,44 +26,36 @@ export default function Catalog() {
           </p>
         </div>
         <div className="mt-8 grid gap-8">
-          <section>
-            <h2 className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="text-sm font-semibold text-red-900">Séance 1</span>
-              <span className="font-serif text-xl font-bold">
-                Démarrer avec React
-              </span>
-            </h2>
-            <ol className="border-y border-stone-200" start="1">
-              <li className="border-b border-stone-200 last:border-0">
-                <a className="lesson-link" href="./01-installation/index.html">
-                  <span className="text-sm tabular-nums text-red-900">01</span>
-                  <span className="lesson-name">Démarrer avec Vite</span>
-                  <span className="lesson-concept">Installation</span>
-                </a>
-              </li>
-              <li className="border-b border-stone-200 last:border-0">
-                <a className="lesson-link" href="./02-structure/index.html">
-                  <span className="text-sm tabular-nums text-red-900">02</span>
-                  <span className="lesson-name">La bibliothèque de classNamee</span>
-                  <span className="lesson-concept">Structure des dossiers</span>
-                </a>
-              </li>
-              <li className="border-b border-stone-200 last:border-0">
-                <a className="lesson-link" href="./03-hello-world/index.html">
-                  <span className="text-sm tabular-nums text-red-900">03</span>
-                  <span className="lesson-name">Bienvenue à Dakar</span>
-                  <span className="lesson-concept">Hello World</span>
-                </a>
-              </li>
-              <li className="border-b border-stone-200 last:border-0">
-                <a className="lesson-link" href="./04-jsx/index.html">
-                  <span className="text-sm tabular-nums text-red-900">04</span>
-                  <span className="lesson-name">Les places de l’atelier</span>
-                  <span className="lesson-concept">Les bases de JSX</span>
-                </a>
-              </li>
-            </ol>
-          </section>
+          {sessions.map(([title, start, end], index) => (
+            <section key={title}>
+              <h2 className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-sm font-semibold text-red-900">
+                  Séance {index + 1}
+                </span>
+                <span className="font-serif text-xl font-bold"> {title} </span>
+              </h2>
+              <ol className="border-y border-stone-200" start={start + 1}>
+                {labs.slice(start, end).map((lab) => (
+                  <li key={lab.slug} className="border-b border-stone-200 last:border-0">
+                    <a
+                      className="lesson-link"
+                      href={
+                        staticPreview
+                        ? `/lab/${lab.slug}`
+                        : `#/lab/${lab.slug}`
+                      }
+                    >
+                      <span className="text-sm tabular-nums text-red-900">
+                        { lab.number }
+                      </span>
+                      <span className="lesson-name">{ lab.title }</span>
+                      <span className="lesson-concept">{ lab.concept }</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))}
         </div>
       </main>
     </>

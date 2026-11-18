@@ -1,4 +1,6 @@
 import Installation from "./01_Installation/Installation";
+import Forms from "./11_formulaires/Atelier";
+import Timer from "./14_UseEffect/Atelier";
 
 const lessons = [
   [
@@ -76,7 +78,7 @@ const lessons = [
     'Inscription à un parcours',
     'Formulaires contrôlés',
     'Inscrivez Awa au parcours Data. Essayez d’abord avec une adresse incomplète, puis corrigez-la pour obtenir la confirmation. React garde les valeurs des champs et valide la saisie à l’envoi.',
-    Installation,
+    Forms,
   ],
   [
     'etat-partage',
@@ -97,7 +99,7 @@ const lessons = [
     'Le chronomètre de séance',
     'useEffect',
     'Démarrez et mettez en pause le chronomètre. L’effet crée un intervalle pendant la lecture et le nettoie à la pause ou au démontage du composant.',
-    Installation,
+    Timer,
   ],
   [
     'usememo',
